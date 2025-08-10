@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-Certification Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Micro-Certification Learning Platform</h1>
+        <nav>
+            <button id="dashboardBtn">Dashboard</button>
+            <button id="lessonsBtn">Lessons</button>
+            <button id="quizBtn">Quiz</button>
+        </nav>
+    </header>
+
+    <main id="content">
+        <section id="dashboard" class="active">
+            <h2>Your Dashboard</h2>
+            <p>Track your progress and view earned certificates here.</p>
+            <div id="progressTracker">
+                <p>Lessons Completed: <span id="lessonsCompleted">0</span></p>
+                <p>Certificates Earned: <span id="certificatesEarned">0</span></p>
+            </div>
+        </section>
+
+        <section id="lessons">
+            <h2>Available Lessons</h2>
+            <ul id="lessonList"></ul>
+        </section>
+
+        <section id="quiz">
+            <h2>Quiz</h2>
+            <div id="quizContainer"></div>
+            <button id="submitQuiz">Submit Quiz</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Micro-Certification Learning Platform</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
