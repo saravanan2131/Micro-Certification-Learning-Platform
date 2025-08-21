@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>பேருந்து டிக்கட் - Tamil Nadu Bus Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Madurai', sans-serif;
+        }
+
+        :root {
+            --primary: #d35400;
+            --secondary: #ff9933;
+            --accent: #138808;
+            --light: #f5f5f5;
+            --dark: #333333;
+            --white: #ffffff;
+            --saffron: #ff9933;
+            --green: #138808;
+            --yellow: #ffcc00;
+            --red: #cc0000;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9933 0%, #ff9933 25%, #ffffff 25%, #ffffff 75%, #138808 75%, #138808 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--saffron), var(--white), var(--green));
+            color: var(--dark);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-text span {
+            color: var(--green);
+        }
+
+        .tamil-text {
+            font-size: 14px;
+            color: var(--dark);
+            margin-top: -5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #b84400;
+            transform: translateY(-2px);
+        }
+
+        /* Language Selector */
+        .language-selector {
+            margin-left: 20px;
+        }
+
+        .language-selector select {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            background: white;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--dark);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--saffron);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--saffron), var(--green));
+        }
+
+        .search-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-size: 32px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .search-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--saffron), var(--green));
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .form-control {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .swap-button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-bottom: 5px;
+            transition: background 0.3s;
+        }
+
+        .swap-button:hover {
+            background: #b84400;
+        }
+
+        .search-btn {
+            grid-column: 1 / -1;
+            padding: 15px;
+            background: linear-gradient(to right, var(--saffron), var(--primary));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(211, 84, 0, 0.3);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(211, 84, 0, 0.4);
+        }
+
+        /* Bus Listings */
+        .bus-listings {
+            margin: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--saffron), var(--green));
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .bus-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .bus-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--saffron);
+            border-bottom: 5px solid var(--green);
+        }
+
+        .bus-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .bus-header {
+            background: linear-gradient(to right, var(--saffron), var(--primary));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bus-name {
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .bus-type {
+            background: var(--green);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .bus-details {
+            padding: 20px;
+        }
+
+        .bus-route {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .bus-timings {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .bus-departure {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .bus-arrival {
+            color: var(--green);
+            font-weight: 600;
+        }
+
+        .bus-features {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px 0;
+            border-top: 1px dashed #ddd;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .bus-fare {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .fare-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .select-seats-btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+
+        .select-seats-btn:hover {
+            background: #b84400;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--saffron), var(--white), var(--green));
+            color: var(--dark);
+            padding: 50px 0 20px;
+            margin-top: 80px;
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--green);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 16px;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(211, 84, 0, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+            color: var(--primary);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: #555;
+            font-size: 16px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .auth-buttons {
+                justify-content: center;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .bus-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tamil Nadu Special Elements */
+        .kolam-divider {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .special-offers {
+            background: linear-gradient(45deg, var(--saffron), var(--yellow));
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .special-offers h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .offer-cards {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 10px 5px;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 250px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .offer-card h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div>
+                        <div class="logo-text">தமிழ்நாடு <span>பேருந்து</span></div>
+                        <div class="tamil-text">Tamil Nadu Bus Booking</div>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">முகப்பு</a></li>
+                        <li><a href="#">சேவைகள்</a></li>
+                        <li><a href="#">பாதைகள்</a></li>
+                        <li><a href="#">கட்டணம்</a></li>
+                        <li><a href="#">தொடர்பு</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">உள்நுழைய</button>
+                    <button class="btn btn-primary">பதிவு</button>
+                    <div class="language-selector">
+                        <select>
+                            <option>தமிழ்</option>
+                            <option>English</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>வணக்கம்! Tamil Nadu Bus Ticket Booking</h1>
+            <p>Book your bus tickets across Tamil Nadu with ease and convenience</p>
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <h2 class="search-title">பேருந்து டிக்கெட் புங்க்</h2>
+            <form class="search-form">
+                <div class="form-group">
+                    <label for="from">புறப்படும் இடம்</label>
+                    <input type="text" id="from" class="form-control" placeholder="From">
+                </div>
+                
+                <div class="form-group">
+                    <button type="button" class="swap-button"><i class="fas fa-exchange-alt"></i></button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="to">செல்லும் இடம்</label>
+                    <input type="text" id="to" class="form-control" placeholder="To">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">பயண தேதி</label>
+                    <input type="date" id="date" class="form-control">
+                </div>
+                
+                <button type="submit" class="search-btn">தேடு <i class="fas fa-search"></i></button>
+            </form>
+        </section>
+
+        <div class="kolam-divider">
+            <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+        </div>
+
+        <!-- Special Offers -->
+        <section class="special-offers">
+            <h3>சிறப்பு Offers</h3>
+            <div class="offer-cards">
+                <div class="offer-card">
+                    <h4>மாணவர் தள்ளுபடி</h4>
+                    <p>20% discount for students</p>
+                </div>
+                <div class="offer-card">
+                    <h4>முதியோர் சலுகை</h4>
+                    <p>30% discount for senior citizens</p>
+                </div>
+                <div class="offer-card">
+                    <h4>குடும்ப சலுகை</h4>
+                    <p>Special fares for family trips</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bus Listings -->
+        <section class="bus-listings">
+            <h2 class="section-title">அவைபற்றி Buses</h2>
+            <div class="bus-cards">
+                <!-- Bus Card 1 -->
+                <div class="bus-card">
+                    <div class="bus-header">
+                        <div class="bus-name">சென்னை எக்ஸ்பிரஸ்</div>
+                        <div class="bus-type">ஏசி</div>
+                    </div>
+                    <div class="bus-details">
+                        <div class="bus-route">
+                            <span>சென்னை</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span>மதுரை</span>
+                        </div>
+                        <div class="bus-timings">
+                            <span class="bus-departure">08:00 AM</span>
+                            <span class="bus-arrival">02:30 PM</span>
+                        </div>
+                        <div class="bus-features">
+                            <div class="feature"><i class="fas fa-snowflake"></i> AC</div>
+                            <div class="feature"><i class="fas fa-tv"></i> TV</div>
+                            <div class="feature"><i class="fas fa-wifi"></i> WiFi</div>
+                        </div>
+                        <div class="bus-fare">
+                            <div class="fare-amount">₹850</div>
+                            <button class="select-seats-btn">இருக்கை தேர்வு</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bus Card 2 -->
+                <div class="bus-card">
+                    <div class="bus-header">
+                        <div class="bus-name">கோயம்புத்தூர் டெலக்ஸ்</div>
+                        <div class="bus-type">நான்-ஏசி</div>
+                    </div>
+                    <div class="bus-details">
+                        <div class="bus-route">
+                            <span>கோயம்புத்தூர்</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span>திருச்சி</span>
+                        </div>
+                        <div class="bus-timings">
+                            <span class="bus-departure">10:15 AM</span>
+                            <span class="bus-arrival">02:45 PM</span>
+                        </div>
+                        <div class="bus-features">
+                            <div class="feature"><i class="fas fa-fan"></i> Non-AC</div>
+                            <div class="feature"><i class="fas fa-water"></i> Water</div>
+                        </div>
+                        <div class="bus-fare">
+                            <div class="fare-amount">₹450</div>
+                            <button class="select-seats-btn">இருக்கை தேர்வு</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bus Card 3 -->
+                <div class="bus-card">
+                    <div class="bus-header">
+                        <div class="bus-name">ராமேஸ்வரம் சூப்பர்</div>
+                        <div class="bus-type">ஏசி</div>
+                    </div>
+                    <div class="bus-details">
+                        <div class="bus-route">
+                            <span>சென்னை</span>
+                            <i class="fas fa-arrow-right"></i>
+                            <span>ராமேஸ்வரம்</span>
+                        </div>
+                        <div class="bus-timings">
+                            <span class="bus-departure">07:30 AM</span>
+                            <span class="bus-arrival">08:15 PM</span>
+                        </div>
+                        <div class="bus-features">
+                            <div class="feature"><i class="fas fa-snowflake"></i> AC</div>
+                            <div class="feature"><i class="fas fa-utensils"></i> Food</div>
+                            <div class="feature"><i class="fas fa-wifi"></i> WiFi</div>
+                        </div>
+                        <div class="bus-fare">
+                            <div class="fare-amount">₹1200</div>
+                            <button class="select-seats-btn">இருக்கை தேர்வு</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>எங்களை பற்றி</h3>
+                    <p>Tamil Nadu Bus Service offers comfortable, affordable, and convenient bus travel across Tamil Nadu with premium amenities.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>விரைவு இணைப்புகள்</h3>
+                    <ul>
+                        <li><a href="#">எங்களை பற்றி</a></li>
+                        <li><a href="#">பாதைகள் & அட்டவணை</a></li>
+                        <li><a href="#">கட்டணம்</a></li>
+                        <li><a href="#">விதிமுறைகள் & நிபந்தனைகள்</a></li>
+                        <li><a href="#">தனியுரிமைக் கொள்கை</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>பிரபலமான பாதைகள்</h3>
+                    <ul>
+                        <li><a href="#">சென்னை to மதுரை</a></li>
+                        <li><a href="#">கோயம்புத்தூர் to ஊட்டி</a></li>
+                        <li><a href="#">திருச்சி to ராமேஸ்வரம்</a></li>
+                        <li><a href="#">சேலம் to தஞ்சாவூர்</a></li>
+                        <li><a href="#">திருநெல்வேலி to கன்னியாகுமரி</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>தொடர்பு கொள்ள</h3>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                        <li><i class="fas fa-envelope"></i> support@tnbus.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Anna Salai, Chennai - 600002</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Tamil Nadu Bus Service. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today for the date picker
+        document.getElementById('date').min = new Date().toISOString().split("T")[0];
+        
+        // Simple form validation
+        document.querySelector('.search-form').addEventListener('submit', function(e) {
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            
+            if (!from || !to) {
+                e.preventDefault();
+                alert('Please enter both departure and arrival cities.');
+            }
+        });
+        
+        // Add interactivity to Select Seats buttons
+        document.querySelectorAll('.select-seats-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const busName = this.closest('.bus-card').querySelector('.bus-name').textContent;
+                alert(`You've selected seats on ${busName}. Proceeding to payment.`);
+            });
+        });
+        
+        // Swap from and to locations
+        document.querySelector('.swap-button').addEventListener('click', function() {
+            const fromValue = document.getElementById('from').value;
+            const toValue = document.getElementById('to').value;
+            
+            document.getElementById('from').value = toValue;
+            document.getElementById('to').value = fromValue;
+        });
+    </script>
+</body>
+</html>
